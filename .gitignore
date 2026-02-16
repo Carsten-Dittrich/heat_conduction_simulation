@@ -5,15 +5,16 @@ build/
 *.exe
 
 # Python
-python/
 .venv/
 __pycache__/
+python/temp/*
 *.pyc
 
 # Data
 *.json
 *.csv
 *.txt
+*.gif
 
 # IDE
 .vscode/
@@ -22,3 +23,5 @@ __pycache__/
 # CMake
 CMakeFiles/
 CMakeCache.txt
+cmake_install.cmake
+Makefile
