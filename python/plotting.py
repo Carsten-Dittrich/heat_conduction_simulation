@@ -33,15 +33,19 @@ def load_steps(filename):
     return steps, np.array(values)
 
 
-def create_gif(values, output="plots/heat.gif"):
+def create_gif(
+        values: np.ndarray, 
+        output: str, 
+        delete_temps: bool
+        ):
     """
     Creates a GIF visualizing temperature evolution using colored squares.
     Works for current 1D arrays and is prepared for future 2D fields.
 
     Inputs:
-        values (array): shape (steps, N) for 1D data
-                        later also (steps, H, W) for 2D data
-        output (str):   path to output GIF file
+        values (array): shape (steps, N) for 1D data; later also (steps, H, W) for 2D data
+        output (str): path to output GIF file
+        delete_temps (bool): If True, all temporary PNG frames are deleted after the GIF is created.
 
     Output:
         A GIF showing the temperature distribution over time as a heatmap.
@@ -78,7 +82,19 @@ def create_gif(values, output="plots/heat.gif"):
     imageio.mimsave(output, images, duration=0.4)
     print(f"GIF saved as: {output}")
 
+    if delete_temps:
+        for i in range(len(values)):
+            try:
+                os.remove(f"temp/_frame_{i}.png")
+            except FileNotFoundError:
+                pass
+        print("Finished deleting temporary plots.")
+
+
 
 if __name__ == "__main__":
-    steps, values = load_steps("../output.txt")
-    create_gif(values)
+    steps, values = load_steps("../outputs/raw/simulation_1D.txt")
+    create_gif(
+        values,
+        output="../outputs/plots/heat_1D_2.gif",
+        delete_temps=True)
