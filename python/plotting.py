@@ -73,7 +73,7 @@ def create_gif(
         else:
             plt.ylabel("Y")
 
-        filename = f"plots/_frame_{i}.png"
+        filename = f"temp/_frame_{i}.png"
         plt.savefig(filename)
         plt.close()
 
