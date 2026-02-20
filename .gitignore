@@ -11,9 +11,9 @@ python/temp/*
 *.pyc
 
 # Data
+outputs/
 *.json
 *.csv
-*.txt
 *.gif
 
 # IDE
