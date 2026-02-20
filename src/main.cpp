@@ -3,15 +3,15 @@
 #include <vector>
 
 
-int heat_conduction_1D(int iterations) {
-    std::ofstream file("output.txt");
+int heat_conduction_1D(int iterations, const std::string& output_path) {
+    std::ofstream file(output_path);
     if (!file) {
         std::cerr << "Error opening the file!\n";
         return 1;
     }
 
-    std::vector<double> temperatures(10, 20.0);
-    temperatures[9] = 100.0;
+    std::vector<double> temperatures(50, 20.0);
+    temperatures[0] = 100.0;
 
     std::vector<double> new_T = temperatures;
 
@@ -43,6 +43,6 @@ int heat_conduction_1D(int iterations) {
 
 
 int main() {
-    heat_conduction_1D(100);
+    heat_conduction_1D(100, "outputs/raw/simulation_1D.txt");
     return 0;
 }
